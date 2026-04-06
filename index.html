@@ -129,7 +129,7 @@
     <button id="btn-add">Thêm Sản phẩm</button>
   </form>
   <script>
-    var highestId = 0;
+    // sorting table
     var productsData = [];
     var currentSortColumn = null;
     var currentSortDirection = 'asc';
@@ -197,15 +197,7 @@
       });
     }
 
-    function addProduct(id, name, category, price, quantity) {
-      if (id > highestId) {
-        highestId = id;
-      }
-      productsData.push({ id, name, category, price, quantity });
-      renderTable();
-    }
-
-    // Setup header clicks for sorting
+    // setup handlers
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('#product-table thead th').forEach((th, index) => {
         th.style.cursor = 'pointer';
@@ -215,6 +207,16 @@
         });
       });
     });
+
+    var highestId = 0;
+
+    function addProduct(id, name, category, price, quantity) {
+      if (id > highestId) {
+        highestId = id;
+      }
+      productsData.push({ id, name, category, price, quantity });
+      renderTable();
+    }
 
     // on page load
     const xhr = new XMLHttpRequest();
