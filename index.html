@@ -198,7 +198,7 @@
     }
 
     // setup handlers
-    document.addEventListener('DOMContentLoaded', function() {
+    function setupSortHeaders() {
       document.querySelectorAll('#product-table thead th').forEach((th, index) => {
         th.style.cursor = 'pointer';
         th.addEventListener('click', function() {
@@ -206,7 +206,13 @@
           sortTable(columns[index]);
         });
       });
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupSortHeaders);
+    } else {
+      setupSortHeaders();
+    }
 
     var highestId = 0;
 
